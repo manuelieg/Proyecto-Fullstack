@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Usuario {
+public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String rol;
-    private String username;
-    private String contrasena;
-    private String correo;
+    private String titulo;
+    private String descripcion;
+    private String profesor;
+    private String categoria;
 }

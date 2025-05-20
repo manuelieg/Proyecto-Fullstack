@@ -23,6 +23,7 @@ public class UsuarioService {
         String output="";
         for(Usuario usuario:usuarioRepository.findAll()){
             output+="ID Usuario: "+usuario.getId()+"\n";
+            output+="Rol: "+usuario.getRol()+"\n";
             output+="Username: "+usuario.getUsername()+"\n";
             output+="Contrasena: "+usuario.getContrasena()+"\n";
             output+="Correo: "+usuario.getCorreo()+"\n";
@@ -30,7 +31,7 @@ public class UsuarioService {
 
         if(output.isEmpty()){
             return "No hay usuarios";
-        }else{
+        } else {
             return output;
         }
     }
@@ -40,11 +41,26 @@ public class UsuarioService {
         if(usuarioRepository.existsById(id)){
             Usuario usuario = usuarioRepository.findById(id).get();
             output+="ID Usuario: "+usuario.getId()+"\n";
+            output+="Rol: "+usuario.getRol()+"\n";
             output+="Username: "+usuario.getUsername()+"\n";
             output+="Contrasena: "+usuario.getContrasena()+"\n";
             output+="Correo: "+usuario.getCorreo()+"\n";
             return output;
-        }else{
+        } else {
+            return "No se encuentra el usuario";
+        }
+    }
+
+    public String actualizarUsuario(int id,Usuario usuario){
+        if(usuarioRepository.existsById(id)){
+            Usuario actualizar =  usuarioRepository.findById(id).get();
+            actualizar.setUsername(usuario.getUsername());
+            actualizar.setRol(usuario.getRol());
+            actualizar.setContrasena(usuario.getContrasena());
+            actualizar.setCorreo(usuario.getCorreo());
+            usuarioRepository.save(actualizar);
+            return "Usuario actualizado con exito";
+        } else {
             return "No se encuentra el usuario";
         }
     }
@@ -53,21 +69,10 @@ public class UsuarioService {
         if(usuarioRepository.existsById(id)){
             usuarioRepository.deleteById(id);
             return "Usuario eliminado con exito";
-        }else{
+        } else {
             return "No se encuentra el usuario";
         }
     }
 
-    public String actualizarUsuario(int id,Usuario usuario){
-        if(usuarioRepository.existsById(id)){
-            Usuario buscado =  usuarioRepository.findById(id).get();
-            buscado.setUsername(usuario.getUsername());
-            buscado.setContrasena(usuario.getContrasena());
-            buscado.setCorreo(usuario.getCorreo());
-            usuarioRepository.save(buscado);
-            return "Usuario actualizado con exito";
-        }else{
-            return "No se encuentra el usuario";
-        }
-    }
+
 }
