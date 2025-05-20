@@ -19,13 +19,13 @@ public class CursoService {
     }
 
     public String listarCursos() {
-        String output="";
+        String output = "";
         for(Curso curso:cursoRepository.findAll()){
-            output+="ID Curso: "+curso.getId()+"\n";
-            output+="Titulo: "+curso.getTitulo()+"\n";
-            output+="Descripcion: "+curso.getDescripcion()+"\n";
-            output+="Profesor: "+curso.getProfesor()+"\n";
-            output+="Categoria: "+curso.getCategoria()+"\n";
+            output += "ID Curso: "+curso.getId()+"\n";
+            output += "Titulo: "+curso.getTitulo()+"\n";
+            output += "Descripcion: "+curso.getDescripcion()+"\n";
+            output += "Profesor: "+curso.getProfesor()+"\n";
+            output += "Categoria: "+curso.getCategoria()+"\n";
         }
 
         if(output.isEmpty()){
@@ -35,22 +35,20 @@ public class CursoService {
         }
     }
 
-
     public String obtenerCursoPorId(int id){
         String output="";
         if(cursoRepository.existsById(id)){
             Curso curso = cursoRepository.findById(id).get();
-            output+="ID Curso: "+curso.getId()+"\n";
-            output+="Titulo: "+curso.getTitulo()+"\n";
-            output+="Descripcion: "+curso.getDescripcion()+"\n";
-            output+="Profesor: "+curso.getProfesor()+"\n";
-            output+="Categoria: "+curso.getCategoria()+"\n";
+            output += "ID Curso: "+curso.getId()+"\n";
+            output += "Titulo: "+curso.getTitulo()+"\n";
+            output += "Descripcion: "+curso.getDescripcion()+"\n";
+            output += "Profesor: "+curso.getProfesor()+"\n";
+            output += "Categoria: "+curso.getCategoria()+"\n";
             return output;
         } else {
             return "No se encuentra el usuario";
         }
     }
-
 
     public String actualizarCurso(int id, Curso curso) {
         if (cursoRepository.existsById(id)) {
@@ -65,7 +63,6 @@ public class CursoService {
             return "Curso no encontrado";
         }
     }
-
 
     public String eliminarCurso(int id) {
         if (cursoRepository.existsById(id)) {

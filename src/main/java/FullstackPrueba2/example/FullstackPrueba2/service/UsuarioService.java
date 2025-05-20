@@ -20,13 +20,13 @@ public class UsuarioService {
     }
 
     public String listarUsuarios() {
-        String output="";
+        String output = "";
         for(Usuario usuario:usuarioRepository.findAll()){
-            output+="ID Usuario: "+usuario.getId()+"\n";
-            output+="Rol: "+usuario.getRol()+"\n";
-            output+="Username: "+usuario.getUsername()+"\n";
-            output+="Contrasena: "+usuario.getContrasena()+"\n";
-            output+="Correo: "+usuario.getCorreo()+"\n";
+            output += "ID Usuario: "+usuario.getId()+"\n";
+            output += "Rol: "+usuario.getRol()+"\n";
+            output += "Username: "+usuario.getUsername()+"\n";
+            output += "Contrasena: "+usuario.getContrasena()+"\n";
+            output += "Correo: "+usuario.getCorreo()+"\n";
         }
 
         if(output.isEmpty()){
@@ -40,11 +40,11 @@ public class UsuarioService {
         String output="";
         if(usuarioRepository.existsById(id)){
             Usuario usuario = usuarioRepository.findById(id).get();
-            output+="ID Usuario: "+usuario.getId()+"\n";
-            output+="Rol: "+usuario.getRol()+"\n";
-            output+="Username: "+usuario.getUsername()+"\n";
-            output+="Contrasena: "+usuario.getContrasena()+"\n";
-            output+="Correo: "+usuario.getCorreo()+"\n";
+            output += "ID Usuario: "+usuario.getId()+"\n";
+            output += "Rol: "+usuario.getRol()+"\n";
+            output += "Username: "+usuario.getUsername()+"\n";
+            output += "Contrasena: "+usuario.getContrasena()+"\n";
+            output += "Correo: "+usuario.getCorreo()+"\n";
             return output;
         } else {
             return "No se encuentra el usuario";
