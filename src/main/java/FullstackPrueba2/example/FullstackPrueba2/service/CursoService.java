@@ -24,8 +24,6 @@ public class CursoService {
             output += "ID Curso: "+curso.getId()+"\n";
             output += "Titulo: "+curso.getTitulo()+"\n";
             output += "Descripcion: "+curso.getDescripcion()+"\n";
-            output += "Profesor: "+curso.getProfesor()+"\n";
-            output += "Categoria: "+curso.getCategoria()+"\n";
         }
 
         if(output.isEmpty()){
@@ -42,8 +40,6 @@ public class CursoService {
             output += "ID Curso: "+curso.getId()+"\n";
             output += "Titulo: "+curso.getTitulo()+"\n";
             output += "Descripcion: "+curso.getDescripcion()+"\n";
-            output += "Profesor: "+curso.getProfesor()+"\n";
-            output += "Categoria: "+curso.getCategoria()+"\n";
             return output;
         } else {
             return "No se encuentra el usuario";
@@ -55,8 +51,6 @@ public class CursoService {
             Curso existente = cursoRepository.findById(id).get();
             existente.setTitulo(curso.getTitulo());
             existente.setDescripcion(curso.getDescripcion());
-            existente.setProfesor(curso.getProfesor());
-            existente.setCategoria(curso.getCategoria());
             cursoRepository.save(existente);
             return "Curso actualizado con éxito";
         } else {

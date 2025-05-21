@@ -17,6 +17,4 @@ public class Curso {
     private int id;
     private String titulo;
     private String descripcion;
-    private String profesor;
-    private String categoria;
 }
