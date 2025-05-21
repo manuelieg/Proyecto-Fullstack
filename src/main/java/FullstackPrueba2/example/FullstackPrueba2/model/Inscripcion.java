@@ -9,17 +9,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Evaluacion {
+public class Inscripcion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String titulo;
-    private String descripcion;
-    private String fechaInicio;
-    private String fechaFin;
+    private String fechaInscripcion;
 
     @ManyToOne
-    @JoinColumn(name = "id_curso")
+    private Estudiante estudiante;
+
+    @ManyToOne
     private Curso curso;
 }

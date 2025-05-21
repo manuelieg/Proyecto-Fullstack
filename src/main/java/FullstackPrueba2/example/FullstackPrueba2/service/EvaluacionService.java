@@ -26,7 +26,7 @@ public class EvaluacionService {
             output += "Descripción: " + evaluacion.getDescripcion() + "\n";
             output += "Fecha Inicio: " + evaluacion.getFechaInicio() + "\n";
             output += "Fecha Fin: " + evaluacion.getFechaFin() + "\n";
-            output += "ID Curso: " + evaluacion.getCursoId() + "\n\n";
+            output += "ID Curso: " + evaluacion.getCurso().getId() + "\n\n";
         }
 
         if (output.isEmpty()) {
@@ -45,7 +45,7 @@ public class EvaluacionService {
             output += "Descripción: " + evaluacion.getDescripcion() + "\n";
             output += "Fecha Inicio: " + evaluacion.getFechaInicio() + "\n";
             output += "Fecha Fin: " + evaluacion.getFechaFin() + "\n";
-            output += "ID Curso: " + evaluacion.getCursoId() + "\n";
+            output += "ID Curso: " + evaluacion.getCurso().getId() + "\n";
             return output;
         } else {
             return "No se encuentra la evaluación";
@@ -59,7 +59,7 @@ public class EvaluacionService {
             actualizar.setDescripcion(evaluacion.getDescripcion());
             actualizar.setFechaInicio(evaluacion.getFechaInicio());
             actualizar.setFechaFin(evaluacion.getFechaFin());
-            actualizar.setCursoId(evaluacion.getCursoId());
+            actualizar.setCurso(evaluacion.getCurso());
             evaluacionRepository.save(actualizar);
             return "Evaluación actualizada con éxito";
         } else {
