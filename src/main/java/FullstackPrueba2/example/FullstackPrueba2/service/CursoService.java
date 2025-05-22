@@ -42,7 +42,7 @@ public class CursoService {
             output += "Descripcion: "+curso.getDescripcion()+"\n";
             return output;
         } else {
-            return "No se encuentra el usuario";
+            return "No se encuentra el curso";
         }
     }
 

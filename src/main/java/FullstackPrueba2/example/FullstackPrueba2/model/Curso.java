@@ -17,4 +17,8 @@ public class Curso {
     private int id;
     private String titulo;
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_profesor")
+    private Usuario profesor;
 }
