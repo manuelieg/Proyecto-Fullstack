@@ -22,4 +22,8 @@ public class Evaluacion {
     @ManyToOne
     @JoinColumn(name = "id_curso")
     private Curso curso;
+
+    @ManyToOne
+    @JoinColumn(name = "id_profesor")
+    private Usuario profesor;
 }

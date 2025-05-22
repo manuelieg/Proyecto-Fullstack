@@ -17,7 +17,7 @@ public class Inscripcion {
     private String fechaInscripcion;
 
     @ManyToOne
-    private Estudiante estudiante;
+    private Usuario estudiante;
 
     @ManyToOne
     private Curso curso;
