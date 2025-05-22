@@ -27,13 +27,13 @@ public class UsuarioController {
         return usuarioService.obtenerUsuarioPorID(id);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUsuario(@PathVariable int id) {
-        return usuarioService.eliminarUsuario(id);
-    }
-
     @PutMapping("/{id}")
     public String updateUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
     return usuarioService.actualizarUsuario(id, usuario);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUsuario(@PathVariable int id) {
+        return usuarioService.eliminarUsuario(id);
     }
 }

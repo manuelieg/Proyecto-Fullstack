@@ -13,14 +13,10 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/usuarios/**").permitAll()
-                        .requestMatchers("/cursos/**").permitAll()
-                        .requestMatchers("/inscripciones/**").permitAll()
-                        .requestMatchers("/evaluaciones/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/**").permitAll() //
+                        .anyRequest().permitAll()
                 )
-                .httpBasic(); //
-
+                .httpBasic().disable();
         return http.build();
     }
 }

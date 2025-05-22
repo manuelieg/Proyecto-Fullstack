@@ -27,13 +27,13 @@ public class CursoController {
         return cursoService.obtenerCursoPorId(id);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteCurso(@PathVariable int id) {
-        return cursoService.eliminarCurso(id);
-    }
-
     @PutMapping("/{id}")
     public String updateCurso(@PathVariable int id, @RequestBody Curso curso) {
         return cursoService.actualizarCurso(id, curso);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCurso(@PathVariable int id) {
+        return cursoService.eliminarCurso(id);
     }
 }

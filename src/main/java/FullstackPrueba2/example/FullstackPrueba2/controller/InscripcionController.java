@@ -27,13 +27,13 @@ public class InscripcionController {
         return inscripcionService.obtenerInscripcionPorID(id);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteInscripcion(@PathVariable int id) {
-        return inscripcionService.eliminarInscripcion(id);
-    }
-
     @PutMapping("/{id}")
     public String updateInscripcion(@PathVariable int id, @RequestBody Inscripcion inscripcion) {
         return inscripcionService.actualizarInscripcion(id, inscripcion);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteInscripcion(@PathVariable int id) {
+        return inscripcionService.eliminarInscripcion(id);
     }
 }

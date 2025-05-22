@@ -27,13 +27,13 @@ public class EvaluacionController {
         return evaluacionService.obtenerEvaluacionPorID(id);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteEvaluacion(@PathVariable int id) {
-        return evaluacionService.eliminarEvaluacion(id);
-    }
-
     @PutMapping("/{id}")
     public String updateEvaluacion(@PathVariable int id, @RequestBody Evaluacion evaluacion) {
         return evaluacionService.actualizarEvaluacion(id, evaluacion);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEvaluacion(@PathVariable int id) {
+        return evaluacionService.eliminarEvaluacion(id);
     }
 }
