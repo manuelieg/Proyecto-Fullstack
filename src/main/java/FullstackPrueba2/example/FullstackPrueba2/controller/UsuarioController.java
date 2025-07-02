@@ -12,18 +12,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -58,9 +53,10 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "No se encuentran datos")
     })
     @Parameter(description = "El ID del usuario", example = "123")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable int id) {
+    public ResponseEntity<EntityModel<Usuario>> getUsuarioById(@PathVariable int id) {
         if (usuarioService.obtenerUsuarioPorID(id).isPresent()) {
-            return new ResponseEntity<>(usuarioService.obtenerUsuarioPorID(id).get(), HttpStatus.OK);
+            Usuario usuario = usuarioService.obtenerUsuarioPorID(id).get();
+            return new ResponseEntity<>(assembler.toModel(usuario), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -74,10 +70,10 @@ public class UsuarioController {
                             schema = @Schema(implementation = Usuario.class))),
             @ApiResponse(responseCode = "204", description = "No hay contenido en la solicitud")
     })
-    public ResponseEntity<Usuario> postUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<EntityModel<Usuario>> postUsuario(@RequestBody Usuario usuario) {
         usuarioService.agregarUsuario(usuario);
         if (usuarioService.obtenerUsuarioPorID(usuario.getId()).isPresent()) {
-            return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+            return new ResponseEntity<>(assembler.toModel(usuario), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

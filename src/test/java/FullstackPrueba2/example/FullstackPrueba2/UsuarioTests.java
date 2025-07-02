@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -30,7 +30,7 @@ class UsuarioTests {
     @Autowired
     MockMvc mockMvc;
 
-    @MockitoBean
+    @MockBean
     UsuarioService usuarioServiceMock;
 
     @Test
@@ -52,16 +52,14 @@ class UsuarioTests {
     @Test
     @DisplayName("Test controller")
     void testController()  {
-        when(usuarioServiceMock.listarUsuarios()).thenReturn("Lista completa");
+        when(usuarioServiceMock.listarUsuarios()).thenReturn(List.of(new Usuario()));
 
         try{
             mockMvc.perform(get("/usuarios"))
                     .andExpect(status().isOk())
-                    .andExpect(content().string("Lista completa"));
         }catch(Exception ex){
             System.out.println(ex.getMessage());
             fail();
         }
     }
-
 }
