@@ -2,12 +2,13 @@ package FullstackPrueba2.example.FullstackPrueba2.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public class Usuario extends RepresentationModel<Usuario> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
