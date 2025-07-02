@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -17,49 +20,19 @@ public class UsuarioService {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public String agregarUsuario(Usuario usuario) {
-        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
-        usuarioRepository.save(usuario);
-        return "Usuario agregado con exito";
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
     }
 
-    public String listarUsuarios() {
-        String output = "";
-        for(Usuario usuario:usuarioRepository.findAll()){
-            output += "ID Usuario: " + usuario.getId() + "\n";
-            output += "Username: " + usuario.getUsername() + "\n";
-            output += "Nombre: " + usuario.getNombre() + "\n";
-            output += "Apellido: " + usuario.getApellido() + "\n";
-            output += "Correo: " + usuario.getCorreo() + "\n";
-            output += "Teléfono: " + usuario.getTelefono() + "\n";
-            output += "Rol: " + usuario.getRol() + "\n";
-        }
-
-        if(output.isEmpty()){
-            return "No hay usuarios";
-        } else {
-            return output;
-        }
+    public Usuario agregarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
 
-    public String obtenerUsuarioPorID(int id){
-        String output="";
-        if(usuarioRepository.existsById(id)){
-            Usuario usuario = usuarioRepository.findById(id).get();
-            output += "ID Usuario: " + usuario.getId() + "\n";
-            output += "Username: " + usuario.getUsername() + "\n";
-            output += "Nombre: " + usuario.getNombre() + "\n";
-            output += "Apellido: " + usuario.getApellido() + "\n";
-            output += "Correo: " + usuario.getCorreo() + "\n";
-            output += "Teléfono: " + usuario.getTelefono() + "\n";
-            output += "Rol: " + usuario.getRol() + "\n";
-            return output;
-        } else {
-            return "No se encuentra el usuario";
-        }
+    public Optional<Usuario> obtenerUsuarioPorID(int id) {
+        return usuarioRepository.findById(id);
     }
 
-    public String actualizarUsuario(int id, Usuario usuario) {
+    public void actualizarUsuario(int id, Usuario usuario) {
         if (usuarioRepository.existsById(id)) {
             Usuario actualizar = usuarioRepository.findById(id).get();
             actualizar.setUsername(usuario.getUsername());
@@ -72,18 +45,10 @@ public class UsuarioService {
             actualizar.setCorreo(usuario.getCorreo());
             actualizar.setRol(usuario.getRol());
             usuarioRepository.save(actualizar);
-            return "Usuario actualizado con éxito";
-        } else {
-            return "No se encuentra el usuario";
         }
     }
 
-    public String eliminarUsuario(int id){
-        if(usuarioRepository.existsById(id)){
-            usuarioRepository.deleteById(id);
-            return "Usuario eliminado con exito";
-        } else {
-            return "No se encuentra el usuario";
-        }
+    public void eliminarUsuario(int id) {
+        usuarioRepository.deleteById(id);
     }
 }

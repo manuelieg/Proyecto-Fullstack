@@ -1,4 +1,5 @@
 package FullstackPrueba2.example.FullstackPrueba2.model;
+
 import jakarta.persistence.*;
 import lombok.*;
 
