@@ -30,7 +30,7 @@ public class CursoController {
     CursoModelAssembler assembler;
 
     @GetMapping
-    @Operation(summary = "Obtener cursos", description = "Obtiene la lista de cursos del sistema")
+    @Operation(summary = "Obtener Cursos", description = "Obtiene la lista de cursos del sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna lista de cursos"),
             @ApiResponse(responseCode = "404", description = "No hay datos disponibles")
