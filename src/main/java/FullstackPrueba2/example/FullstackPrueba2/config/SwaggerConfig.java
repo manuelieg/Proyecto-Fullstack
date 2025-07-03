@@ -12,7 +12,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI().info(
-                new Info().title("Spring API  Duoc").version("1.0.0").description("Backend Fullstack I para implementacion semestral")
+                new Info().title("API Duoc").version("1.0.0").description("Backend Fullstack I")
         );
     }
 }

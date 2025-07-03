@@ -22,7 +22,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping("/usuarios")
-@Tag(name = "Controlador Usuarios", description = "Servicio de gestion de usuarios Fullstack I")
+@Tag(name = "Controlador de Usuarios", description = "Servicio de gestion de usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -32,10 +32,10 @@ public class UsuarioController {
     UsuarioModelAssembler assembler;
 
     @GetMapping
-    @Operation(summary = "Obtener Usuarios", description = "Obtiene la lista de usuarios existentes en el sistema")
+    @Operation(summary = "Obtener Usuarios", description = "Obtiene la lista de usuarios del sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Retorna lista completa de usuarios"),
-            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
+            @ApiResponse(responseCode = "200", description = "Retorna lista de usuarios"),
+            @ApiResponse(responseCode = "404", description = "No hay datos disponibles")
     })
     public ResponseEntity<CollectionModel<EntityModel<Usuario>>> getAllUsuarios() {
         List<Usuario> lista = usuarioService.listarUsuarios();
@@ -47,10 +47,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar Usuario por ID",description = "Obtiene un usuario segun el ID registrado en el sistema")
+    @Operation(summary = "Buscar Usuario por ID",description = "Obtiene usuario segun su ID en el sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna Usuario"),
-            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
+            @ApiResponse(responseCode = "404", description = "No hay datos disponibles")
     })
     @Parameter(description = "El ID del usuario", example = "123")
     public ResponseEntity<EntityModel<Usuario>> getUsuarioById(@PathVariable int id) {
@@ -80,7 +80,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar Usuario", description = "Permite actualizar los datos de un usuario segun su ID")
+    @Operation(summary = "Actualizar Usuario", description = "Permite actualizar los datos de usuaio segun su ID en el sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario modificado",
                     content = @Content(mediaType = "application/json",
@@ -98,10 +98,10 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary="Eliminar Usuario por ID", description = "Elimina un usuario segun el ID registrado en el sistema")
+    @Operation(summary="Eliminar Usuario por ID", description = "Elimina un usuario segun su ID en el sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna Usuario"),
-            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
+            @ApiResponse(responseCode = "404", description = "No hay datos disponibles")
     })
     @Parameter(description = "El ID del usuario", example = "123")
     public ResponseEntity<Void> deleteUsuario(@PathVariable int id) {

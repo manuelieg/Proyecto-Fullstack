@@ -6,6 +6,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class CursoService {
@@ -13,57 +16,28 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
-    public String agregarCurso(Curso curso) {
-        cursoRepository.save(curso);
-        return "Curso agregado con éxito";
+    public List<Curso> listarCursos() {
+        return cursoRepository.findAll();
     }
 
-    public String listarCursos() {
-        String output = "";
-        for(Curso curso:cursoRepository.findAll()){
-            output += "ID Curso: "+curso.getId()+"\n";
-            output += "Titulo: "+curso.getTitulo()+"\n";
-            output += "Descripcion: "+curso.getDescripcion()+"\n";
-        }
-
-        if(output.isEmpty()){
-            return "No hay cursos";
-        } else {
-            return output;
-        }
+    public Curso agregarCurso(Curso curso) {
+        return cursoRepository.save(curso);
     }
 
-    public String obtenerCursoPorId(int id){
-        String output="";
-        if(cursoRepository.existsById(id)){
-            Curso curso = cursoRepository.findById(id).get();
-            output += "ID Curso: "+curso.getId()+"\n";
-            output += "Titulo: "+curso.getTitulo()+"\n";
-            output += "Descripcion: "+curso.getDescripcion()+"\n";
-            return output;
-        } else {
-            return "No se encuentra el curso";
-        }
+    public Optional<Curso> obtenerCursoPorId(int id) {
+        return cursoRepository.findById(id);
     }
 
-    public String actualizarCurso(int id, Curso curso) {
+    public void actualizarCurso(int id, Curso curso) {
         if (cursoRepository.existsById(id)) {
             Curso existente = cursoRepository.findById(id).get();
             existente.setTitulo(curso.getTitulo());
             existente.setDescripcion(curso.getDescripcion());
             cursoRepository.save(existente);
-            return "Curso actualizado con éxito";
-        } else {
-            return "Curso no encontrado";
         }
     }
 
-    public String eliminarCurso(int id) {
-        if (cursoRepository.existsById(id)) {
-            cursoRepository.deleteById(id);
-            return "Curso eliminado con éxito";
-        } else {
-            return "Curso no encontrado";
-        }
+    public void eliminarCurso(int id) {
+        cursoRepository.deleteById(id);
     }
 }
