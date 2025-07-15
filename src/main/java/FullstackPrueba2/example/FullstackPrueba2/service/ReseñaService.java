@@ -6,69 +6,41 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class ReseñaService {
 
     @Autowired
-    ReseñaRepository reseñaRepository;
+    private ReseñaRepository reseñaRepository;
 
-    public String agregarReseña(Reseña reseña) {
-        reseñaRepository.save(reseña);
-        return "Reseña agregada con éxito";
+    public List<Reseña> listarReseñas() {
+        return reseñaRepository.findAll();
     }
 
-    public String listarReseñas() {
-        String output = "";
-        for(Reseña reseña : reseñaRepository.findAll()) {
-            output += "ID Reseña: " + reseña.getId() + "\n";
-            output += "Comentario: " + reseña.getComentario() + "\n";
-            output += "Calificación: " + reseña.getCalificacion() + "\n";
-            output += "Usuario ID: " + (reseña.getEstudiante() != null ? reseña.getEstudiante().getId() : "N/A") + "\n";
-            output += "Curso ID: " + (reseña.getCurso() != null ? reseña.getCurso().getId() : "N/A") + "\n";
-        }
-        if(output.isEmpty()){
-            return "No hay reseñas";
-        } else {
-            return output;
-        }
+    public Reseña agregarReseña(Reseña reseña) {
+        return reseñaRepository.save(reseña);
     }
 
-    public String obtenerReseñaPorID(int id) {
-        String output = "";
-        if(reseñaRepository.existsById(id)){
-            Reseña reseña = reseñaRepository.findById(id).get();
-            output += "ID Reseña: " + reseña.getId() + "\n";
-            output += "Comentario: " + reseña.getComentario() + "\n";
-            output += "Calificación: " + reseña.getCalificacion() + "\n";
-            output += "Usuario ID: " + (reseña.getEstudiante() != null ? reseña.getEstudiante().getId() : "N/A") + "\n";
-            output += "Curso ID: " + (reseña.getCurso() != null ? reseña.getCurso().getId() : "N/A") + "\n";
-            return output;
-        } else {
-            return "No se encuentra la reseña";
-        }
+    public Optional<Reseña> obtenerReseñaPorID(int id) {
+        return reseñaRepository.findById(id);
     }
 
-    public String actualizarReseña(int id, Reseña reseña) {
-        if(reseñaRepository.existsById(id)){
+    public void actualizarReseña(int id, Reseña reseña) {
+        if (reseñaRepository.existsById(id)) {
             Reseña actualizar = reseñaRepository.findById(id).get();
-            actualizar.setComentario(reseña.getComentario());
             actualizar.setCalificacion(reseña.getCalificacion());
+            actualizar.setComentario(reseña.getComentario());
+            actualizar.setFecha(reseña.getFecha());
             actualizar.setEstudiante(reseña.getEstudiante());
             actualizar.setCurso(reseña.getCurso());
             reseñaRepository.save(actualizar);
-            return "Reseña actualizada con éxito";
-        } else {
-            return "No se encuentra la reseña";
         }
     }
 
-    public String eliminarReseña(int id) {
-        if(reseñaRepository.existsById(id)){
-            reseñaRepository.deleteById(id);
-            return "Reseña eliminada con éxito";
-        } else {
-            return "No se encuentra la reseña";
-        }
+    public void eliminarReseña(int id) {
+        reseñaRepository.deleteById(id);
     }
 }
